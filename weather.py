@@ -1,13 +1,19 @@
 import tkinter as tk 
 import requests
 import time
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+API_KEY = os.getenv('API_KEY')
 
 def getWeather(canvas):
 
     """ function to access the API data that we need """
 
     city = textfield.get()
-    api = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=b6b1c0a73ef0b1d36baff61f105b71e5'
+    api = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + API_KEY
     json_data = requests.get(api).json()
     condition = json_data['weather'][0]['main']
     temp = int(json_data['main']['temp'] - 273.15)
